@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+body {
+  background-color: black;
+  color: white;
+}
+</style>
+<script type="text/javascript"
+  src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/scripts2.js"></script>
+<!-- GetUrlParams -->
+<script type="text/javascript">
+  function getUrlVars() {
+    var vars = {};
+    //replace URL encoded ,(%2C)
+    var parts = window.location.href.replace(/%2C/gi, ',')
+    parts = parts.replace(/%3A/gi, ':')
+    parts = parts.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+        function(m, key, value) {
+          vars[key] = value;
+        });
+    return vars;
+  }
+  function getUrlParam(parameter, defaultvalue) {
+    var urlparameter = defaultvalue;
+    if (window.location.href.indexOf(parameter) > -1) {
+      urlparameter = getUrlVars()[parameter];
+    }
+    return urlparameter;
+  }
+
+  var YTVID = getUrlParam('YTVID', 'hENgrbIMiy4');
+  var Interval = getUrlParam('Interval', '10');
+  var seekPointParams = getUrlParam('seekPointParams',
+      extractYTcomments());
+</script>
+</head>
+<body>
+  <div id="player"></div>
+
+  <div style="font-size: 1.5em">
+    <span id="title">title</span>
+  </div>
+  
+  <br /> Seek points (##m##s)
+  <input type="text" id="seekto" style="width: 100%;" />
+  <br /> Interval (seconds)
+  <input type="text" id="seekInterval" />
+  <button id="seek" style="width: 20%; height: 100px;">Seek</button>
+
+  <button class="pause" id="pause">Pause seeking</button>
+
+  <div style="font-size: 2em">
+    <span id="countdowntimer">x</span> Seconds remain
+  </div>
+</html>
